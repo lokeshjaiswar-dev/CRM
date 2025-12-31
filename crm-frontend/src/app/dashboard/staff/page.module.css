@@ -1,0 +1,44 @@
+.container{
+    height: 100vh;
+    width: auto;
+    /* background-color: grey; */
+}
+
+.staffBox{
+    margin-top: 20px;
+    border: 1px solid black;
+}
+
+.staffHeader{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* border-bottom: 1px;
+    border-color: black;
+    border-style: solid; */
+}
+
+.table{
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 5px;
+}
+
+.message{
+    color: tomato;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+}
+
+.button{
+    padding: 8px 12px;
+    width: 100px;
+}
+
+.title{
+    font-size: 30px;
+}

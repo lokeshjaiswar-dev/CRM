@@ -1,0 +1,53 @@
+.container{
+    height: 100vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formBox{
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 30px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.input{
+    width: 250px;
+    height: 30px;
+}
+
+.select{
+    width: 258px;
+    height: 35px;
+    color: grey;
+}
+
+.message{
+    color: tomato;
+}
+
+.button{
+    width: 150px;
+    height: 34px;
+}
+
+.link{
+    margin-top: 10px;
+    text-decoration: none;
+    color: black
+}
+
