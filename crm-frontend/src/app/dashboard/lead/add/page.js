@@ -19,8 +19,9 @@ export default function LeadPage() {
   const [lead_source,setLead_source] = useState(0)
   const [assigned_to, setAssigned_to] = useState(0)
 
-  const router = useRouter()
+  const [userData,setUserdata] = useState({})
 
+  const router = useRouter()
 
   const fetchMasterData = async(userData) => {
 
@@ -65,8 +66,7 @@ export default function LeadPage() {
     setMessage("")
 
     try {
-      const userData = JSON.parse(localStorage.getItem("user"))
-
+    
       const response = await fetch('http://localhost:5000/api/lead/add',{
         method: "POST",
         headers: {
@@ -78,7 +78,7 @@ export default function LeadPage() {
           lead_email,
           lead_address,
           lead_phone,
-          assigned_to,
+          assigned_to: userData.role !== "staff" ? assigned_to : userData.id,
           lead_type,
           lead_source,
           "token": userData.token  
@@ -105,8 +105,15 @@ export default function LeadPage() {
   }
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("user"))
-    fetchMasterData(userData)
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    if(user){
+      setUserdata(user)
+      fetchMasterData(user)
+    }
+    else{
+      router.push('/')
+    }
   },[])
 
   return (
@@ -161,17 +168,24 @@ export default function LeadPage() {
               className={styles.input}
             />
 
-            <label className={styles.label}> Assigned To  </label>
-            <select value={assigned_to} onChange={e => setAssigned_to(Number(e.target.value))} className={styles.select}>
-                  <option value={0}>Select Name</option>
-                {
-                  master.users?.map((user) => (
-                    <option key={user.id} value={user.id}>
-                      {user.fname} {user.lname}
-                    </option>
-                  ))
-                }
-            </select>
+            {
+              userData.role != "staff" && 
+              (
+                <>
+                  <label className={styles.label}> Assigned To  </label>
+                  <select value={assigned_to} onChange={e => setAssigned_to(Number(e.target.value))} className={styles.select}>
+                        <option value={0}>Select Name</option>
+                        {
+                          master.users?.map((user) => (
+                                <option key={user.id} value={user.id}>
+                              {user.fname} {user.lname}
+                                </option>
+                          ))
+                        }
+                  </select>
+                </>
+              )
+            }
 
             <label className={styles.label}>Lead Type</label>
             <select value={lead_type} onChange={(e) => setLead_type(Number(e.target.value))} className={styles.select}>

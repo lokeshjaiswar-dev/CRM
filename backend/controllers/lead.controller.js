@@ -72,6 +72,17 @@ const addLead = async(req,res) => {
 
         const decodedToken = verifyToken(token) 
 
+        if(decodedToken.role == "staff"){
+            const [result] = await pool.execute('insert into leads(created_by, assigned_to, company_id, lead_name, lead_email, lead_phone, lead_address, lead_company, lead_type_id, lead_source_id) values (?,?,?,?,?,?,?,?,?,?)',[decodedToken.id,decodedToken.id,decodedToken.company_id,lead_name,lead_email,lead_phone,lead_address,lead_company,lead_type,lead_source])
+
+            if(result.affectedRows === 0){
+                return res.status(400).json({
+                    'success': false,
+                    'message': "error while storing data in db"
+                })
+            } 
+        }
+
         const [result] = await pool.execute('insert into leads(created_by, assigned_to, company_id, lead_name, lead_email, lead_phone, lead_address, lead_company, lead_type_id, lead_source_id) values (?,?,?,?,?,?,?,?,?,?)',[decodedToken.id,assigned_to,decodedToken.company_id,lead_name,lead_email,lead_phone,lead_address,lead_company,lead_type,lead_source])
 
         if(result.affectedRows === 0){
@@ -146,7 +157,7 @@ const getAllDropdownData = async(req,res) => {
         }
         const decodedUser = verifyToken(token)
 
-        const [usersData] = await pool.execute("select id, fname, lname from users where company_id = ? ",[decodedUser.company_id])
+        const [usersData] = await pool.execute("select id, fname, lname from users where company_id = ? and id != ?",[decodedUser.company_id, decodedUser.id])
 
         const [leadType] = await pool.execute("select id, type_name from lead_type")
 

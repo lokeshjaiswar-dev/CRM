@@ -3,11 +3,13 @@
 import styles from "./page.module.css"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function layout({children}) {
 
   const router = useRouter()
+
+  const [user,setUser] = useState({})
 
   const handLogout = () => {
     // localStorage and sessionStorage have clear()
@@ -22,22 +24,43 @@ export default function layout({children}) {
     router.push('/')
   }
 
-  useEffect(() => { 
-    const user = localStorage.getItem("user")
-    if(!user){
-      router.push('/')
-    }
-  },[])
+useEffect(() => { 
+  const userFromLocal = JSON.parse(localStorage.getItem("user"))
+  
+  if(!userFromLocal){
+    router.push('/')  
+    return
+  }
+  
+  setUser(userFromLocal)
+  console.log("User mil gaya:", userFromLocal)
+}, [router])
 
 
   return (
     <>
         <div className={styles.navbar}>
-            <div className={styles.linkSection}>
-                <Link href="/dashboard" className={styles.link}>Dashboard</Link>
-                <Link href="/dashboard/staff" className={styles.link}> Staff Management</Link>
-                <Link href="/dashboard/lead" className={styles.link}> Lead Management</Link>
-            </div>
+
+          {
+            user.role != "owner" ? (
+              <>
+                <div className={styles.linkSection}>
+                    <Link href="/dashboard" className={styles.link}>Dashboard</Link>
+                    <Link href="/dashboard/staff" className={styles.link}> Staff Management</Link>
+                    <Link href="/dashboard/lead" className={styles.link}> Lead Management</Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={styles.linkSection}>
+                    <Link href="/dashboard" className={styles.link}>Dashboard</Link>
+                    <Link href="/dashboard/staff" className={styles.link}> Staff Management</Link>
+                    <Link href="/dashboard/lead" className={styles.link}> Lead Management</Link>
+                    <Link href="/dashboard/master" className={styles.link}> Master Management</Link>
+                </div>
+              </>
+            )
+          }
 
           <div>
             <Link className={styles.logout} href='/dashboard/profile'>Profile</Link>

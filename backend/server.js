@@ -7,6 +7,7 @@ import authRoutes from './routes/auth.routes.js'
 import staffRoutes from './routes/staff.routes.js'
 import leadRoutes from './routes/lead.routes.js'
 import dashRoutes from './routes/dash.routes.js'
+import masterRoutes from './routes/master.routes.js'
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/staff', staffRoutes)
 app.use('/api/lead', leadRoutes)
 app.use('/api/dash', dashRoutes)
+app.use('/api/master', masterRoutes)
 
 app.get('/api/health', (req,res) => {
     res.json({
