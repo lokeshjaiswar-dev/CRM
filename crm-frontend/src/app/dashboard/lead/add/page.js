@@ -111,101 +111,110 @@ export default function LeadPage() {
 
   return (
     <>
+      <div className={styles.container}>
+              <div className={styles.formBox}>
+            <h1 className={styles.title}>Add Lead</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
+            <input 
+              type="text"
+              placeholder="Enter the Lead name"
+              value={lead_name}
+              onChange={(e) => setLead_name(e.target.value)}
+              required 
+              className={styles.input}
+            />
 
-          <input 
-            type="text"
-            placeholder="Enter the Lead name"
-            value={lead_name}
-            onChange={(e) => setLead_name(e.target.value)}
-            required 
-          />
+            <input 
+              type="text"
+              placeholder="Enter the company name"
+              value={lead_company}
+              onChange={(e) => setLead_company(e.target.value)}
+              required 
+              className={styles.input}
+            />
 
-          <input 
-            type="text"
-            placeholder="Enter the company name"
-            value={lead_company}
-            onChange={(e) => setLead_company(e.target.value)}
-            required 
-          />
+            <input 
+              type="text"
+              placeholder="Enter the company's email"
+              value={lead_email}
+              onChange={(e) => setLead_email(e.target.value)}
+              required 
+              className={styles.input}
+            />
 
-          <input 
-            type="text"
-            placeholder="Enter the company's email"
-            value={lead_email}
-            onChange={(e) => setLead_email(e.target.value)}
-            required 
-          />
+            <input 
+              type="text"
+              placeholder="Enter the company's address"
+              value={lead_address}
+              onChange={(e) => setLead_address(e.target.value)}
+              required 
+              className={styles.input}
+            />
 
-          <input 
-            type="text"
-            placeholder="Enter the company's address"
-            value={lead_address}
-            onChange={(e) => setLead_address(e.target.value)}
-            required 
-          />
+            <input 
+              type="text"
+              placeholder="Enter the company's phone no"
+              value={lead_phone}
+              onChange={(e) => setLead_phone(e.target.value)}
+              required 
+              className={styles.input}
+            />
 
-          <input 
-            type="text"
-            placeholder="Enter the company's phone no"
-            value={lead_phone}
-            onChange={(e) => setLead_phone(e.target.value)}
-            required 
-          />
+            <label className={styles.label}> Assigned To  </label>
+            <select value={assigned_to} onChange={e => setAssigned_to(Number(e.target.value))} className={styles.select}>
+                  <option value={0}>Select Name</option>
+                {
+                  master.users?.map((user) => (
+                    <option key={user.id} value={user.id}>
+                      {user.fname} {user.lname}
+                    </option>
+                  ))
+                }
+            </select>
 
-          <label> Assigned To  </label>
-          <select value={assigned_to} onChange={e => setAssigned_to(Number(e.target.value))}>
-                <option value={0}>Select Name</option>
-              {
-                master.users?.map((user) => (
-                  <option key={user.id} value={user.id}>
-                    {user.fname} {user.lname}
-                  </option>
-                ))
-              }
-          </select>
+            <label className={styles.label}>Lead Type</label>
+            <select value={lead_type} onChange={(e) => setLead_type(Number(e.target.value))} className={styles.select}>
+                <option value={0}>Select Type</option>
+                {
+                  master.leadTypes?.map((type) => (
+                    <option key={type.id} value={type.id}>
+                      {type.type_name}
+                    </option>
+                  ))
+                }
+            </select>
 
-          <label>Lead Type</label>
-          <select value={lead_type} onChange={(e) => setLead_type(Number(e.target.value))}>
-              <option value={0}>Select Type</option>
-              {
-                master.leadTypes?.map((type) => (
-                  <option key={type.id} value={type.id}>
-                    {type.type_name}
-                  </option>
-                ))
-              }
-          </select>
+            <label className={styles.label}>Lead Source</label>
+            <select value={lead_source} onChange={(e) => setLead_source(Number(e.target.value))} className={styles.select}>
+                <option value={0}>Select Source</option>
+                {
+                  master.leadSources?.map((source) => (
+                    <option key={source.id} value={source.id}>
+                      {source.source_name}
+                    </option>
+                  ))
+                }
+            </select>
 
-          <label>Lead Source</label>
-          <select value={lead_source} onChange={(e) => setLead_source(Number(e.target.value))}>
-              <option value={0}>Select Source</option>
-              {
-                master.leadSources?.map((source) => (
-                  <option key={source.id} value={source.id}>
-                    {source.source_name}
-                  </option>
-                ))
-              }
-          </select>
+            {/* <label>Lead Status</label>
+            <select value={lead_status} onChange={(e) => setLead_status(Number(e.target.value))}>
+                <option value={0}>Select Status</option>
+                {
+                  master.leadStatuses?.map((status) => (
+                    <option key={status.id} value={status.id}>
+                      {status.status_name}
+                    </option>
+                  ))
+                }
+            </select> */}
 
-          {/* <label>Lead Status</label>
-          <select value={lead_status} onChange={(e) => setLead_status(Number(e.target.value))}>
-              <option value={0}>Select Status</option>
-              {
-                master.leadStatuses?.map((status) => (
-                  <option key={status.id} value={status.id}>
-                    {status.status_name}
-                  </option>
-                ))
-              }
-          </select> */}
+            <input type="submit" value="Add Lead" className={styles.button} />
+        </form>
 
-          <input type="submit" value="Add Lead" />
-      </form>
-
-      {message}
+        {message}
+      </div>
+      </div>
     </>
   )
 }

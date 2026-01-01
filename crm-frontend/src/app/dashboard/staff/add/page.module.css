@@ -1,53 +1,77 @@
-.container{
-    height: 100vh;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
 }
 
 .formBox{
-    height: 500px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid black;
-    border-radius: 30px;
+  width:500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(192, 240, 240);
+  /* border: 2px solid #0d9488; */
+  box-shadow: 0px 0px 7px 0.1px;
+  border-radius: 30px;
 }
 
 .form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title{
+  font-size: 40px;
+  color: teal;
 }
 
 .input{
-    width: 250px;
-    height: 30px;
+  width: 300px;
+  height: 30px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid teal;
 }
 
-.select{
-    width: 258px;
-    height: 35px;
-    color: grey;
-}
-
-.message{
-    color: tomato;
+.input::placeholder{
+  padding-left: 10px;
+  color: teal;
 }
 
 .button{
-    width: 150px;
-    height: 34px;
+  margin-left: 100px;
+  width: 100px;
+  height: 40px; 
+  background-color: teal;
+  color: white;
+  border-radius: 10px;
+}
+
+.messageBox{
+  color: tomato;
 }
 
 .link{
-    margin-top: 10px;
-    text-decoration: none;
-    color: black
+  margin-top: 10px;
+  text-decoration: none;
+  color: teal;
 }
 
+.select{
+  color: teal;
+  border: 2px solid teal;
+  border-radius: 10px;
+  padding: 13px;
+}

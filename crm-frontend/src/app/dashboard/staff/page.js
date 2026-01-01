@@ -57,7 +57,7 @@ export default function Staff() {
         <div className={styles.container}>
             <div className={styles.staffBox}>
                 <div className={styles.staffHeader}>
-                    <h1 className={styles.title}>Staff Table</h1>
+                    <h1 className={styles.title}>Staff Dashboard</h1>
                     <button onClick={() => router.push('/dashboard/staff/add')}className={styles.button}> Add Staff</button>
                 </div>
 
@@ -91,7 +91,7 @@ export default function Staff() {
 
                 </div>
             </div>
-            <h5 className={styles.message}>{message} Lokesh</h5>
+            {/* <h5 className={styles.message}>{message} Lokesh</h5> */}
         </div>
     </>
   )

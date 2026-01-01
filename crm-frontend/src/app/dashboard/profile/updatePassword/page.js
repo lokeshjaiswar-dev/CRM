@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import styles from './page.module.css'
 
 export default function () {
     
@@ -42,33 +43,40 @@ export default function () {
 
   return (
     <>
-        <form onSubmit={handleSubmit}>
-            <input 
-                type="text"
-                placeholder="Enter the current Password"
-                required
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-            />
-            <input 
-                type="text"
-                placeholder="Enter the New Password"
-                required
-                value={newPassword}
-                onChange={e => setNewPassword(e.target.value)}
-            />
-            <input 
-                type="text"
-                placeholder="Enter the New Confirm Password"
-                required
-                value={cpassword}
-                onChange={e => setCpassword(e.target.value)}
-            />
+        <div className={styles.container}>
 
-            <input type="submit" value="Change Password" />
-        </form>
+                <form onSubmit={handleSubmit} className={styles.formBox}>
+                    <h1 className={styles.title}>Update Password</h1>
+                    <input 
+                        type="text"
+                        placeholder="Enter the current Password"
+                        required
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        className={styles.input}
+                    />
+                    <input 
+                        type="text"
+                        placeholder="Enter the New Password"
+                        required
+                        value={newPassword}
+                        onChange={e => setNewPassword(e.target.value)}
+                        className={styles.input}
+                    />
+                    <input 
+                        type="text"
+                        placeholder="Enter the New Confirm Password"
+                        required
+                        value={cpassword}
+                        onChange={e => setCpassword(e.target.value)}
+                        className={styles.input}
+                    />
 
-        <h3>{message}</h3>
+                    <input type="submit" value="Change Password" className={styles.button}/>
+                </form>
+
+                <h3>{message}</h3>
+            </div>
     </>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import styles from './page.module.css'
 
 export default function UpdateUser() {
 
@@ -56,43 +57,50 @@ export default function UpdateUser() {
 
   return (
     <>
-        <form onSubmit={handleSubmit}>
-            <input 
-                type="text"
-                placeholder="Enter your First Name"
-                required
-                value={fname}
-                onChange={e => setFname(e.target.value)}
-            />
+        <div className={styles.container}>
+                <form onSubmit={handleSubmit} className={styles.formBox}>
+                <h1 className={styles.title}>Update User</h1>
+                <input 
+                    type="text"
+                    placeholder="Enter your First Name"
+                    required
+                    value={fname}
+                    onChange={e => setFname(e.target.value)}
+                    className={styles.input}
+                />
 
-            <input 
-                type="text"
-                placeholder="Enter your Last Name"
-                required
-                value={lname}
-                onChange={e => setLname(e.target.value)}
-            />
+                <input 
+                    type="text"
+                    placeholder="Enter your Last Name"
+                    required
+                    value={lname}
+                    onChange={e => setLname(e.target.value)}
+                    className={styles.input}
+                />
 
-            <input 
-                type="email"
-                placeholder="Enter your email"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-            />
+                <input 
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className={styles.input}
+                />
 
-            <input 
-                type="text"
-                placeholder="Enter your Phone no"
-                required
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
-            />
+                <input 
+                    type="text"
+                    placeholder="Enter your Phone no"
+                    required
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    className={styles.input}
+                />
 
-            <input type="submit" value="Update"/>
-        </form>
+                <input type="submit" value="Update" className={styles.button}/>
+            </form>
 
-        <h5>{message}</h5>
+            <h5>{message}</h5>
+        </div>
     </>
   )
 }

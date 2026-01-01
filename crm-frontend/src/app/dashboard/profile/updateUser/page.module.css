@@ -33,7 +33,6 @@
   border-radius: 10px;
   border: 2px solid teal;
   margin-top: 20px;
-  background-color: white;
 }
 
 .input::placeholder{
@@ -49,11 +48,5 @@
   background-color: teal;
   color: white;
   border-radius: 10px;
-  text-decoration: none;
-  padding: 8px 12px;
 }
 
-.buttonBox{
-    margin-top: 20px;
-    margin-left:-27px;
-}

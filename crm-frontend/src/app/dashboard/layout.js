@@ -39,8 +39,10 @@ export default function layout({children}) {
                 <Link href="/dashboard/lead" className={styles.link}> Lead Management</Link>
             </div>
 
-            <Link className={styles.profile} href='/dashboard/profile'>Profile</Link>
-            <button onClick={handLogout} className={styles.profile}>Logout</button>
+          <div>
+            <Link className={styles.logout} href='/dashboard/profile'>Profile</Link>
+            <button onClick={handLogout} className={styles.logout}>Logout</button>
+          </div>
         </div>
 
         {children}

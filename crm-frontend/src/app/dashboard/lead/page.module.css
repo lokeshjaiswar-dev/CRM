@@ -1,19 +1,19 @@
+body{
+    height: 100%;
+    width: 100%;
+}
+
 .container{
     display: flex;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    background: rgb(192, 240, 240);
+    flex-direction: column;
+    align-items: center;
+    background: rgb(192, 240, 240); 
+    height: 100vh; 
 }
 
-.staffBox{
-    border: 1px solid teal;
-    margin: 10px;
-}
-
-.staffHeader{
+.leadHeader{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -23,6 +23,7 @@
     padding: 5px;
     margin: 10px;
 }
+
 
 .message{
     color: tomato;
@@ -35,11 +36,14 @@
 
 .button{
     padding: 8px 12px;
-    width: 100px;
+    width: 150px;
     background-color: teal;
     color: white;
     font-size: 15px;
     border-radius: 15px;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 50px;
 }
 
 .title{
@@ -53,4 +57,10 @@
 
 .table td{
     color: rgb(1, 151, 151);
+}
+
+.select{
+    color: teal;
+    border: 1px solid teal;
+    border-radius: 10px;
 }

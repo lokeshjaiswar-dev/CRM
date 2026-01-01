@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import styles from './page.module.css'
 
 export default function LeadPage() {
   const [leads, setLeads] = useState([])
@@ -88,47 +89,53 @@ export default function LeadPage() {
 
 
   return (
-    <div>
-      <h1>Leads Dashboard</h1>
-      <Link href='/dashboard/lead/add'>Add New Lead</Link>
+    <div className={styles.container}>
+      <div className={styles.leadHeader}>
+          <h1 className={styles.title}>Leads Dashboard</h1>
+          <Link href='/dashboard/lead/add' className={styles.button}>Add New Lead</Link>
+      </div>
       
-      {message && <p>{message}</p>}
-      
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Company</th>
-            <th>Assigned To</th>
-            <th>Current Status</th>
-            <th>Change Status</th>
-          </tr>
-        </thead>
+      <div className={styles.tableContainer}>
         
-        <tbody>
-          {leads.map(lead => (
-            <tr key={lead.id}>
-              <td>{lead.lead_name}</td>
-              <td>{lead.lead_company}</td>
-              <td>{lead.fname} {lead.lname}</td>
-              <td>{lead.status_name}</td>
-              <td>
-                <select 
-                  value={lead.lead_status_id}
-                  onChange={(e) => updateStatus(lead.id, Number(e.target.value))}
-                >
-                  <option value="1">New</option>
-                  <option value="2">Contacted</option>
-                  <option value="3">Won</option>
-                  <option value="4">Lost</option>
-                </select>
-              </td>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Assigned To</th>
+              <th>Current Status</th>
+              <th>Change Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          
+          <tbody>
+            {leads.map(lead => (
+              <tr key={lead.id}>
+                <td>{lead.lead_name}</td>
+                <td>{lead.lead_company}</td>
+                <td>{lead.fname} {lead.lname}</td>
+                <td>{lead.status_name}</td>
+                <td>
+                  <select 
+                    value={lead.lead_status_id}
+                    onChange={(e) => updateStatus(lead.id, Number(e.target.value))}
+                    className={styles.select}
+                  >
+                    <option value="1" className={styles.select}>New</option>
+                    <option value="2" className={styles.select}>Contacted</option>
+                    <option value="3" className={styles.select}>Won</option>
+                    <option value="4" className={styles.select}>Lost</option>
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {message && <p>{message}</p>}
+      </div>
       
-      {leads.length === 0 && <p>No leads found</p>}
+      {/* {leads.length === 0 && <p>No leads found</p>} */}
     </div>
   )
 }

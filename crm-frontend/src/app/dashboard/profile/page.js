@@ -53,21 +53,19 @@ export default function Profile() {
   return (
     <>
         <div className={styles.container}>
-            <div className={styles.userCard}>
-                <div className={styles.details}>
-                    <label className={styles.label}>First Name : {user.fname}</label>
-                    <label className={styles.label}>Last Name : {user.lname}</label>
-                    <label className={styles.label}>Email : {user.email}</label>
-                    <label className={styles.label}>Company : {user.company_name}</label>
-                    <label className={styles.label}>Phone No : {user.phone}</label>
-                </div>
+                <div className={styles.formBox}>
+                    <h1 className={styles.title}>Profile Card</h1>
+                    <label className={styles.input}>First Name : {user.fname}</label>
+                    <label className={styles.input}>Last Name : {user.lname}</label>
+                    <label className={styles.input}>Email : {user.email}</label>
+                    <label className={styles.input}>Company : {user.company_name}</label>
+                    <label className={styles.input}>Phone No : {user.phone}</label>
+                <div className={styles.buttonBox}>
+                    <Link href='/dashboard/profile/updatePassword' className={styles.button}>Update Password</Link>
 
-                <div className={styles.action}>
-                    <Link href='/dashboard/profile/updatePassword' className={styles.link}>Update Password</Link>
-
-                    <Link href='/dashboard/profile/updateUser' className={styles.link}>Update User</Link>
+                    <Link href='/dashboard/profile/updateUser' className={styles.button}>Update User</Link>
                 </div>
-        </div>
+                </div>
         </div>
     </>
   )

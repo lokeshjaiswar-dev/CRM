@@ -10,6 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
 }
 
 .formBox{
@@ -19,7 +20,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
+  background: rgb(192, 240, 240);
+  /* border: 2px solid #0d9488; */
+  box-shadow: 0px 0px 7px 0.1px;
   border-radius: 30px;
 }
 
@@ -31,17 +34,29 @@ body {
 
 .title{
   font-size: 40px;
+  color: teal;
 }
 
 .input{
   width: 300px;
   height: 30px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid teal;
+}
+
+.input::placeholder{
+  padding-left: 10px;
+  color: teal;
 }
 
 .button{
-  margin-left: 50px;
-  width: 200px;
-  height: 30px; 
+  margin-left: 100px;
+  width: 100px;
+  height: 40px; 
+  background-color: teal;
+  color: white;
+  border-radius: 10px;
 }
 
 .messageBox{
@@ -51,4 +66,5 @@ body {
 .link{
   margin-top: 10px;
   text-decoration: none;
+  color: teal;
 }
