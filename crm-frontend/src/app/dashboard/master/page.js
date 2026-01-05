@@ -170,7 +170,7 @@ export default function MasterPage() {
                                 setEditId(null)
                             }}>x</button>
                         </div>
-                    </div>
+                    </div>;
 
                     <form onSubmit={handleSubmit} className={styles.inputs}>
                         <input 
