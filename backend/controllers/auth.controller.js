@@ -89,6 +89,15 @@ const register = async(req,res) => {
                 })
             }
 
+            const convertedNumber = Number(phone)
+
+            if(isNaN(convertedNumber)){
+                return res.status(400).json({
+                    'success': false,
+                    'message': "Phone number should be in digits"
+                })                
+            }
+
             const hashedPassword = await bcrypt.hash(password, 10)
             
             const [insertCompany] = await pool.execute(
@@ -127,7 +136,14 @@ const register = async(req,res) => {
     } 
     catch (error) {
         console.log(error.message);
-        
+
+        if(error.code === 'ER_DUP_ENTRY'){
+            return res.status(400).json({
+                'success': false,
+                'message': "Email, Phone or Company Name already exists"
+            })
+        }
+
         return res.status(400).json({
             "success": false,
             'message': "Registeration Failed",

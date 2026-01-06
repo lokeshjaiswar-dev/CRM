@@ -121,18 +121,6 @@ export default function LoginPage() {
                 className={styles.input}
                />
 
-              {/* <select 
-                  value={role}
-                  onChange={e => setRole(e.target.value)}
-                  className={styles.select}
-                  required
-              >
-                  <option value="">Select Role</option>
-                  <option value="staff">Staff</option>
-                  <option value="manager">Manager</option>
-                  <option value="owner">Owner</option>
-              </select> */}
-
               <input type="submit" value="Register" className={styles.button}/>
           </form>
 

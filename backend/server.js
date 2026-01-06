@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
+import pool from './config/database.js';
+
 import authRoutes from './routes/auth.routes.js'
 import staffRoutes from './routes/staff.routes.js'
 import leadRoutes from './routes/lead.routes.js'
@@ -14,6 +16,15 @@ import roleRoutes from './routes/role.routes.js'
 const app = express();
 
 dotenv.config();
+
+pool.getConnection()
+    .then(conn => {
+        console.log('✅ DB Connected');
+        conn.release();
+    })
+    .catch(err => {
+        console.log('❌ DB Error:', err.message);
+    });
 
 app.use(cors({
   origin: 'http://localhost:3000',

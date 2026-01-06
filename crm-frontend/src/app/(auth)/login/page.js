@@ -10,13 +10,36 @@ export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState("");
+  const [error,setError] = useState({})
 
   const router = useRouter();
+
+  const isValidForm = () => {
+    const form = {email:"", password: ""}
+    let isValid = true
+
+    if(!email || !email.includes('@')){
+      form.email = "Enter valid email"
+      isValid = false
+    }
+
+    if(!password){
+      form.password = "Enter the correct password"
+      isValid = false
+    }
+
+    setError(form)
+    return isValid
+  }
 
   const handleSubmit = async(e) => {
 
     e.preventDefault();
     setMessage('');
+
+    if(!isValidForm()){
+      return
+    }
 
     try{
       const response = await fetch('http://localhost:5000/api/auth/login',{
@@ -82,6 +105,16 @@ export default function page() {
             <h3 className={styles.messageBox}>
               {message}
             </h3>
+
+           {
+            (error.email || error.password) && (
+              <>
+                <h3 className={styles.error}>
+                   {error.email} {error.password} 
+                </h3>
+              </>
+            )
+           }
           </div>
       </div>
     </>

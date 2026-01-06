@@ -1,6 +1,5 @@
 'use client'
 
-import { Meera_Inimai } from "next/font/google"
 import { useState,useEffect } from "react"
 import { useRouter } from "next/navigation"
 import styles from './page.module.css'
