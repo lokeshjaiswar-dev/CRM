@@ -49,6 +49,44 @@ create table users(
 --     index idx_email (lead_email)
 -- );
 
+CREATE TABLE leads (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    created_by INT NOT NULL,
+    assigned_to INT,
+    company_id INT NOT NULL,
+    lead_name VARCHAR(200) NOT NULL,
+    lead_email VARCHAR(200) NOT NULL,
+    lead_phone VARCHAR(20) NOT NULL,
+    lead_address VARCHAR(255) NOT NULL,
+    lead_company VARCHAR(100) NOT NULL,
+    
+    -- Foreign key references
+    lead_type_id INT NOT NULL,
+    lead_source_id INT NOT NULL,
+    lead_status_id INT DEFAULT 1,
+    
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    -- Foreign key constraints
+    FOREIGN KEY (created_by) REFERENCES users(id),
+    FOREIGN KEY (assigned_to) REFERENCES users(id),
+    FOREIGN KEY (company_id) REFERENCES companies(id),
+    
+    -- New foreign key constraints
+    FOREIGN KEY (lead_type_id) REFERENCES lead_type(id),
+    FOREIGN KEY (lead_source_id) REFERENCES lead_source(id),
+    FOREIGN KEY (lead_status_id) REFERENCES lead_status(id),
+
+    -- Indexes for better performance
+    INDEX idx_email (lead_email),
+    INDEX idx_lead_type (lead_type_id),
+    INDEX idx_lead_source (lead_source_id),
+    INDEX idx_lead_status (lead_status_id),
+    INDEX idx_company (company_id),
+    INDEX idx_assigned_to (assigned_to)
+);
+
 CREATE table lead_type(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     type_name varchar(50) not null unique,
@@ -89,44 +127,6 @@ insert into lead_status(status_name, description) values
 	("won", "converted to customer"),
 	("lost", "not converted to customer");
 
-
-CREATE TABLE leads (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    created_by INT NOT NULL,
-    assigned_to INT,
-    company_id INT NOT NULL,
-    lead_name VARCHAR(200) NOT NULL,
-    lead_email VARCHAR(200) NOT NULL,
-    lead_phone VARCHAR(20) NOT NULL,
-    lead_address VARCHAR(255) NOT NULL,
-    lead_company VARCHAR(100) NOT NULL,
-    
-    -- Foreign key references
-    lead_type_id INT NOT NULL,
-    lead_source_id INT NOT NULL,
-    lead_status_id INT DEFAULT 1,
-    
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
-    -- Foreign key constraints
-    FOREIGN KEY (created_by) REFERENCES users(id),
-    FOREIGN KEY (assigned_to) REFERENCES users(id),
-    FOREIGN KEY (company_id) REFERENCES companies(id),
-    
-    -- New foreign key constraints
-    FOREIGN KEY (lead_type_id) REFERENCES lead_type(id),
-    FOREIGN KEY (lead_source_id) REFERENCES lead_source(id),
-    FOREIGN KEY (lead_status_id) REFERENCES lead_status(id),
-
-    -- Indexes for better performance
-    INDEX idx_email (lead_email),
-    INDEX idx_lead_type (lead_type_id),
-    INDEX idx_lead_source (lead_source_id),
-    INDEX idx_lead_status (lead_status_id),
-    INDEX idx_company (company_id),
-    INDEX idx_assigned_to (assigned_to)
-);
 
 CREATE TABLE permissions(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -192,10 +192,10 @@ select * from permissions;
 select * from roles;
 select * from role_permissions;
 
-select r.id,r.role_name, group_concat(permission_name) as permissions
-from role_permissions rp
-join roles r on rp.role_id = r.id
-join permissions p on rp.permission_id = p.id
-group by r.id;
+-- select r.id,r.role_name, group_concat(permission_name) as permissions
+-- from role_permissions rp
+-- join roles r on rp.role_id = r.id
+-- join permissions p on rp.permission_id = p.id
+-- group by r.id;
 
 
