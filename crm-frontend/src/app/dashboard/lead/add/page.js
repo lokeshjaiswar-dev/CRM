@@ -19,6 +19,7 @@ export default function LeadPage() {
   const [assigned_to, setAssigned_to] = useState(0)
 
   const [userData,setUserdata] = useState({})
+  const [userList,setUserList] = useState([])
 
   const router = useRouter()
 
@@ -59,12 +60,48 @@ export default function LeadPage() {
     }
   }
 
+  const fetchUser = async(token) => {
+    try {
+      const resposne = await fetch("http://localhost:5000/api/staff/all",{
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json"
+
+        },
+        body: JSON.stringify({token}),
+        credentials: "include"
+      })
+
+      const data = await resposne.json()
+
+      if(data.success == false){
+        console.log("ERROR : ", data.message);
+        return
+      }
+
+      setUserList(data.user)
+
+    } catch (error) {
+      console.log("ERROR : ", error.message);
+    }
+  }
+
   const handleSubmit = async(e) => {
 
     e.preventDefault()
     setMessage("")
 
     try {
+
+      let finalAssignedTo = assigned_to;
+      
+      if (userList.length === 1) {
+        finalAssignedTo = user[0].id;
+      }
+ 
+      else if (userData.role === "staff") {
+        finalAssignedTo = userData.id;
+      }
     
       const response = await fetch('http://localhost:5000/api/lead/add',{
         method: "POST",
@@ -77,7 +114,7 @@ export default function LeadPage() {
           lead_email,
           lead_address,
           lead_phone,
-          assigned_to: userData.role !== "staff" ? assigned_to : userData.id,
+          assigned_to: finalAssignedTo,
           lead_type,
           lead_source,
           "token": userData.token  
@@ -109,6 +146,7 @@ export default function LeadPage() {
     if(user){
       setUserdata(user)
       fetchMasterData(user)
+      fetchUser(user.token)
     }
     else{
       router.push('/')
@@ -168,7 +206,7 @@ export default function LeadPage() {
             />
 
             {
-              userData.role != "staff" && 
+              (userData.role != "staff" && userList.length > 1) && 
               (
                 <>
                   <label className={styles.label}> Assigned To  </label>

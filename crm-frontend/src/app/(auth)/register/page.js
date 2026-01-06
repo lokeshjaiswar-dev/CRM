@@ -16,13 +16,55 @@ export default function LoginPage() {
     const [company_name, setCompany_Name] = useState("")
 
     const [message,setMessage] = useState("")
+
+    const [error,setError] = useState({})
+
     const router = useRouter()
 
+    const validations = () => {
+
+      const formError = {}
+      let isValid = true
+
+      if(fname.length < 3 || lname.length < 3){
+        formError.name = "The characters in first name or last name should be longer than 2"
+        isValid = false
+      }
+
+      if(!email || !email.includes('@')){
+        formError.email = "Enter a valid email"
+        isValid = false
+      }
+
+      if(password !== cpassword){
+        formError.password = "Password and Confirm password should be same"
+        isValid = false
+      }
+
+      if(!company_name){
+        formError.company_name = "Enter company name"
+        isValid = false
+      }
+
+      const convertedPhone = Number(phone)
+      if(isNaN(convertedPhone)){
+        formError.phone = "Phone number should be in digits"
+        isValid = false
+      }
+
+      setError(formError)
+
+      return isValid
+    }
 
     const handleSubmit = async(e) => {
 
       e.preventDefault();
       setMessage("");
+
+      if(!validations()){
+        return
+      }
 
       try {
         const response = await fetch("http://localhost:5000/api/auth/register",{
@@ -76,6 +118,14 @@ export default function LoginPage() {
                 className={styles.input}
                />
 
+            {
+              error.name && (
+                <>
+                  {error.name}
+                </>
+              )
+            }
+
               <input 
                 type="email"
                 placeholder='Enter your Email'
@@ -85,6 +135,14 @@ export default function LoginPage() {
                 className={styles.input}
                />
 
+            {
+              error.email && (
+                <>
+                  {error.email}
+                </>
+              )
+            }
+              
               <input 
                 type="password"
                 placeholder='Set a password'
@@ -103,6 +161,14 @@ export default function LoginPage() {
                 className={styles.input}
                />
 
+            {
+              error.password && (
+                <>
+                  {error.password}
+                </>
+              )
+            }
+
               <input 
                 type="text"
                 placeholder='Enter your Phone Number'
@@ -112,6 +178,14 @@ export default function LoginPage() {
                 className={styles.input}
               />
 
+            {
+              error.phone && (
+                <>
+                  {error.phone}
+                </>
+              )
+            }
+
               <input 
                 type="text"
                 placeholder='Enter your Company name'
@@ -120,6 +194,13 @@ export default function LoginPage() {
                 onChange={e => setCompany_Name(e.target.value)}
                 className={styles.input}
                />
+            {
+              error.company_name && (
+                <>
+                  {error.company_name}
+                </>
+              )
+            }
 
               <input type="submit" value="Register" className={styles.button}/>
           </form>
@@ -127,6 +208,15 @@ export default function LoginPage() {
           <Link href='/' className={styles.link}>Already have an account ? </Link>
 
           <h4 className={styles.message}>{message}</h4>
+
+          {/* {
+            error && (
+              <>
+                {error.name} {error.email} {error.password} {error.phone} {error.company_name}
+              </>
+            )
+          } */}
+
         </div>
       </div>
     </>
